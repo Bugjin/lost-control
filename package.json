@@ -1,0 +1,20 @@
+{
+  "name": "lost-control",
+  "version": "1.0.0",
+  "description": "uesless",
+  "main": "main.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bugjin/lost-control.git"
+  },
+  "author": "guojin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bugjin/lost-control/issues"
+  },
+  "homepage": "https://github.com/Bugjin/lost-control#readme"
+}

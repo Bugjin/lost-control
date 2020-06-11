@@ -1,0 +1,409 @@
+<template>
+  <div class="login">
+  <div class="container" id="container" v-bind:class="{ active:ischange }">
+	<div class="form-container sign-up-container">
+		<form action="#">
+			<h1>Create Account</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="iconfont icon-weixin"></i></a>
+				<a href="#" class="social"><i class="iconfont icon-qq"></i></a>
+				<a href="#" class="social"><i class="iconfont icon-st-github"></i></a>
+			</div>
+			<span>or use your email for registration</span>
+			<input type="text" placeholder="Name" v-model="Newuser.newName" @blur="signUpChack(Newuser,false)"/>
+			<input type="email" placeholder="Email" v-model="Newuser.newEmail" @blur="signUpChack(Newuser,true)"/>
+			<input type="password" placeholder="Password" v-model="Newuser.newPassword"/>
+			<button @click.prevent="signUp" >Sign Up</button><!--注册 -->
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form action="#">
+			<h1>Sign in</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="iconfont icon-weixin"></i></a>
+				<a href="#" class="social"><i class="iconfont icon-qq"></i></a>
+				<a href="#" class="social"><i class="iconfont icon-st-github"></i></a>
+			</div>
+			<span>or use your account</span>
+			<input type="text" placeholder="Username" v-model="mes.username" @blur="chacked(mes.username)" />
+			<input type="password" placeholder="Password" v-model="mes.pwd" />
+			<a href="#">Forgot your password?</a>
+      <button @click.prevent="signIn(mes.username,mes.pwd)" id="btn" >Sign In</button> <!-- 登录按钮 -->
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn" @click="signin">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp" @click="signin">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer>
+	<p>Don't let your regrets continue. It's never too late.</p>
+	
+</footer>
+
+    
+  </div>
+</template>
+<script>
+
+export default {
+  name: 'Login',
+  data: function () {
+    return {
+       ischange:true,
+       mes:{
+          username:window.localStorage.getItem("user"),
+          pwd:window.localStorage.getItem("pwd")
+        },
+        Newuser:
+          {
+            newName:"",
+            newPassword:"",
+            userid:"10007",
+            newEmail:""
+          }
+        ,
+       users:[
+         {username:"guojin",pwd:"555555",userid:"10001",email:"10001@163.com"},
+         {username:"xingyue",pwd:"555555",userid:"00823",email:"10006@163.com"},
+         {username:"zhangsan",pwd:"555555",userid:"10002",email:"10002@163.com"},
+         {username:"lisi",pwd:"555555",userid:"10003",email:"10003@163.com"},
+         {username:"wangwu",pwd:"555555",userid:"10004",email:"10004@163.com"},
+         {username:"lilei",pwd:"555555",userid:"10005",email:"10005@163.com"}
+        ]
+    }
+  },
+  methods:{
+    signin(){//切换注册登录页面
+      this.ischange =!this.ischange
+    },
+    chacked(user){  //验证登录用户名 
+		 if(this.users.some(item =>item.username==user)){
+			 console.log("111111")
+			 return true
+		}
+		 else{alert("用户名不存在")}
+		 
+	
+	},
+	signUpChack(user,flag){//验证注册 用户名和邮箱是否已注册过
+		if(flag){
+			if(this.users.some(item =>item.email==user.newEmail)){
+			alert("该邮箱已注册")} else {
+				return true}
+		}else{
+			let a=this.users.some(item => item.username==user.newName)
+			if(a){
+				alert("用户名已存在")	
+		    } else {
+				return true
+			}	
+			 }	
+	},
+	signIn(user,pwd){
+     
+     const flag=this.users.some((item)=> {
+       return item.username == user&&item.pwd==pwd;
+       }) 
+     console.log(flag) 
+     if(flag){
+        
+       /* this.$router.replace('/User');//登录路由跳转到用户界面
+        this.$store.commit("setusermes",this.mes);//同步保存用户名状态
+        localStorage.setItem('user',this.mes.username);//本地存储username
+        console.log(window.localStorage.getItem("user"))//获取localstorage信息
+        return  
+        */
+       this.$store.dispatch('LoginByUsername', this.mes)//异步提交
+       .then(() => {
+          this.$router.push({ path: '/User' }); //登录成功之后重定向到用户界面
+       }).catch(err => {
+          this.$message.error(err); //登录失败提示错误
+       });
+      }else{
+        alert("账号或密码错误") 
+      }
+    },
+    //注册功能
+    signUp(){
+		let flag=this.Newuser.newName&&this.Newuser.newPassword&&this.Newuser.newEmail;//判断注册信息是否完整
+		
+		// let Newuser={"username":this.Newuser.newName,"pwd":this.Newuser.newPassword,"email":this.Newuser.newEmail,"id":this.Newuser.userid};
+		
+		if(this.signUpChack(this.Newuser)&&flag){//如果注册信息有一项为空，或用户名重复则提示
+			this.users.push(Newuser);//成功注册，添加用户信息
+		
+			this.signIn(this.Newuser.newName,this.Newuser.newPassword);//使用用户注册信息直接登录
+			alert("注册成功！")
+			this.userid++;//修改新的用户注册id
+		}else{
+			alert("请完善您的信息")}
+	}
+  }
+
+ 
+}
+</script>
+
+
+<style scoped>
+  
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800'); */
+
+* {
+	box-sizing: border-box;
+}
+
+
+body {
+	background: #f6f5f7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+	margin: -20px 0 50px;
+  
+}
+.login{
+  margin: 20px;
+}
+
+h1 {
+	font-weight: bold;
+	margin: 0;
+}
+
+h2 {
+	text-align: center;
+}
+
+p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+
+span {
+	font-size: 12px;
+}
+
+a {
+	color: coral;
+	font-size: 14px;
+	text-decoration: none;
+	margin: 15px 0;
+}
+
+button {
+	border-radius: 20px;
+	border: 1px solid #FF4B2B;
+	background:linear-gradient(to right,#a8edea,#fed6e3);
+	color:#f1939c;
+	font-size: 14px;
+	font-weight: bold;
+	/* padding: 0 30px; */
+	width: 50%;
+	height: 30px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 1px;
+	height: 100%;
+	text-align: center;
+	width: 100%;
+}
+
+input {
+	background-color: #eee;
+	background-color: #eef7f2;
+  
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 70%;
+    outline:none; 
+    border-radius: 20px;
+  
+}
+
+.container {
+	background-color: #fff;
+	border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+  margin: 50px auto;
+}
+
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	transition: all 0.6s ease-in-out;
+  
+}
+
+.sign-in-container {
+	left: 0;
+	width: 50%;
+	z-index: 2;
+}
+
+.container.active .sign-in-container {
+	transform: translateX(100%);
+}
+
+.sign-up-container {
+	left: 0;
+	width: 50%;
+	opacity: 0;
+	z-index: 1;
+  
+}
+
+.container.active .sign-up-container {
+	transform: translateX(100%);
+	opacity: 1;
+	z-index: 5;
+	animation: show 0.6s;
+}
+
+@keyframes show {
+	0%, 49.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	50%, 100% {
+		opacity: 1;
+		z-index: 5;
+	}
+}
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+}
+
+.container.active .overlay-container{
+	transform: translateX(-100%);
+}
+
+.overlay {
+	/* background: #FF416C; */
+	background: #869d9d;
+  
+	background: -webkit-linear-gradient(#869d9d);
+	background: linear-gradient(#869d9d);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+}
+
+.container.active .overlay {
+  	transform: translateX(50%);
+}
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	/* padding: 0 4px; */
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+	flex-shrink:2
+}
+
+.overlay-left {
+	transform: translateX(-20%);
+}
+
+.container.active .overlay-left {
+	transform: translateX(0);
+}
+
+.overlay-right {
+	right: 0;
+	transform: translateX(0);
+}
+
+.container.active .overlay-right {
+	transform: translateX(20%);
+}
+
+.social-container {
+	margin: 20px 0;
+}
+
+.social-container a {
+	border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 30px;
+	width: 30px;
+}
+
+</style>
