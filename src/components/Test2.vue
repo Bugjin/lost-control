@@ -4,16 +4,15 @@
     <input v-model="mes">
     <button @click.prevent="changemes" id="btn" >异步修改</button>
     <button @click.prevent="changemes1" id="btn" >同步修改</button>
-  
-  <!-- <HelloWorld></HelloWorld> -->
   </div>
 </template>
 
 <script>
-// import HelloWorld from '@/components/HelloWorld'
 export default {
   name: 'Test1',
-  
+  props: {
+    
+  },
   data:function(){
     return{
       mes:""
@@ -38,10 +37,6 @@ export default {
         
      }
 
-  }
-  ,
-  components:{
-    // HelloWorld
   }
 }
 </script>

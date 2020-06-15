@@ -1,33 +1,36 @@
 <template>
-  <div class="carousel" @keyup.13="delta(1)">
-    
-
-  <div class="postarea" >
-    <div class="posts" :style="computed_left">
-
-      <div class="post_box" v-for="(w,id) in works" :class="{cur_item: id==now_index}" :key="w.title">
-        <div class="img" :style="bg_css(w.url)">
-        <!-- <div class="img" :style="works.url"> -->
-          <div class="infos">
-            <h1>{{w.title}}</h1>
-            <h5>{{w.description}}</h5>
-          </div>
-        </div>
-      </div>
-
+   <div id="content">
+    <Carousel
+        v-model="value"
+        :autoplay="setting.autoplay"
+        :autoplay-speed="setting.autoplaySpeed"
+        :dots="setting.dots"
+        :radius-dot="setting.radiusDot"
+        :trigger="setting.trigger"
+        :arrow="setting.arrow"
+        :loop="setting.loop"
+        id="Carousel"
+        >
+        <Carousel-item v-for="item in imgs" :key="item.title" :height="setting.height">
+            <div class="demo-carousel imgbox" :style="{backgroundImage:'url(' + item.url + ')',
+        backgroundRepeat:'no-repeat',
+        backgroundSize:'cover',
+        backgroundPosition: 'center center'}">
+                
+            
+            <div class="infos">
+                <h1>{{item.title}}</h1>
+                <h5>{{item.description}}</h5>
+            </div>
+            </div>
+        </Carousel-item>
+    </Carousel>
+        
     </div>
-  </div>
-  <div class="left" @click="delta(-1)"><i class="fa fa-angle-left"></i></div>
-  <div class="right" @click="delta(1)"><i class="fa fa-angle-right"></i></div>
-
-
-
-  </div>
 </template>
 
 <script>
-
-let works= [
+let imgs= [
   {
     title: "在水中央",
     description: "男女迷途在大海之中",
@@ -37,170 +40,96 @@ let works= [
   {
     title: "沖泡咖啡",
     description: "用最經典的濾紙沖泡",
-    url:require("../assets/image/img002.jpg")
+    url: require("../assets/image/img002.jpg")
   },
   {
     title: "熊在野",
     description: "孩子，這是你們的世界",
-    url:require("../assets/image/img003.jpg")
+    url: require("../assets/image/img003.jpg")
   },
   {
     title: "鹿兒",
     description: "可愛的小鹿",
-    url:require("../assets/image/img004.jpg")
+    url: require("../assets/image/img004.jpg")
   },
   {
     title: "城堡",
     description: "聳立於林中",
-    url:require("../assets/image/img005.jpg")
+    url: require("../assets/image/img005.jpg")
   }
-]
-export default {
-
- name: 'Carousel',
-  data(){
-    return{
-    works: works,
-    
-    now_index: 0,  
-    span_width: 930,
-    flag: true
+]   
+    export default {
+        data () {
+            return {
+                imgs,
+                value: 0,
+                setting: {
+                    autoplay: false,
+                    autoplaySpeed: 2000,
+                    dots: 'inside',
+                    trigger: 'hover',
+                    radiusDot: true,
+                    arrow: 'hover',
+                    loop:true
+                    
+                }
+            }
+        },
     }
-  },
-  computed: {
-    // works(){return this.$store.state.works},
-    computed_left: function(){
-      let result = {
-        left: (-this.now_index * this.span_width) + "px"
-      };
-      // console.log(result);
-      return result;
-    }},
-    methods: {
-    mounted(){
-    setInterval(() => {
-      let l = this.works.length;
-      this.delta(1);
-      this.now_index++;
-      if (this.now_index == l) {
-        this.now_index = 0;
-      }
-    }, 2000);
-   },
-
-    delta(d){   //实现点击翻页
-      this.now_index = 
-        (this.now_index + d + this.works.length) % this.works.length;
-       
-    },
-    bg_css(url){
-      
-      return {
-        "background-image": "url("+url+")"
-      }
-    },
-    
-
-    //    animate(moveX, callback){
-    //       if(this.flag){
-    //         this.flag = false;  // 关闭节流阀，每次调用动画函数回调函数中打开
-    //         let ulX = this.$refs.showImg.offsetLeft;
-    //         let target = ulX + moveX; // 求出移动的目标位置
-    //         this.swiper = setInterval(()=>{ // 创建定时器移动元素
-    //           let step = (target - this.$refs.showImg.offsetLeft)/10; // 实现由快到慢的过渡效果
-    //           step = step>0 ? Math.ceil(step) : Math.floor(step); // 对每次移动的距离取整
-    //           let startX = this.$refs.showImg.offsetLeft; // 求出元素的当前位置
-    //           if(this.$refs.showImg.offsetLeft === target){ // 移动完成
-    //             clearInterval(this.swiper); // 清除先前已经创建的定时器
-    //             callback && callback();
-    //             return;
-    //           }
-    //           this.$refs.showImg.style.left = startX + step + 'px';  // 移动
-    //         }, 15);
-    //       }
-    //     }
-  }
-}
 </script>
-
-
 <style scoped>
- * {
-  font-family: "cwTeXHei", serif;
-}
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: #1c1c1c;
-  margin: 0;
-  padding: 0;
+#content{
+  /* border: 2px solid red; */
+  
+  height: 100vh;
 }
+#Carousel{
+    
+    height: 90vh;
+    background-color: cadetblue;
+    /* margin-left:  10vw;
+    margin-right:  10vw;
+    margin-top:5vh; */
+    margin:5vh 10vw 0 10vw;
 
-.carousel{
+}
+.imgbox{
+  background: chocolate;
+  height: 90vh;
+  
+  
   position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-
-.postarea {
-  width: 930px;
-  height: 250px;
-  white-space: nowrap;
+.img{
+  width: 100vw;
+  height: 100vh;
+ 
 }
-
-.posts {
-  height: 100%;
-  position: relative;
-  transition: 0.5s;
-}
-
-.post_box {
-  display: inline-block;
-  height: 100%;
-}
-.post_box .img {
-  width: 330px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 300px;
-  margin-right: 300px;
-  background-size: cover;
-  background-position: center center;
-  transition: 0.3s;
-  cursor: pointer;
-}
-.post_box .img:hover {
-  width: 340px;
-  height: 110%;
-}
-.post_box .img:hover .infos {
-  transform: translate(-220px, -10px);
-}
-.post_box .img .infos {
+.infos {
   color: white;
-  transform: translate(-250px, 0);
-  text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  width:33%;
+  height: 20wh;
+  /* background-color: aquamarine; */
+  text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
   transition: 0.3s;
+  
+  position: absolute;
+  top: 5vh;
+
 }
-.post_box .img .infos * {
-  margin: 0;
-}
-.post_box .img .infos h1 {
+
+.imgbox .infos h1 {
   font-size: 40px;
   font-weight: 400;
   margin-bottom: 10px;
 }
-.post_box .img .infos h5 {
-  background-color: white;
+.imgbox .infos h5 {
+  background-color: white ;
+  background-color:rgba(255,255,255,0.4);
+
   color: black;
-  padding: 4px 12px;
+  padding: 4px 0;
   font-size: 20px;
   font-weight: 300;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
@@ -225,36 +154,30 @@ html, body {
     transform: translateX(0px);
   }
 }
-.cur_item .img {
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(30px, 0);
+    filter: saturate(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px, 0);
+  }
+}
+@keyframes silceIn {
+  0% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.imgbox{
   animation: fadeIn 1s ease both;
 }
-.cur_item .infos h5 {
+.imgbox .infos h5 {
   animation: silceIn 1s 0.1s ease;
 }
 
-.left, .right {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border: solid 1px white;
-  position: fixed;
-  color: white;
-  font-size: 30px;
-  transition: 0.3s;
-}
-.left:hover, .right:hover {
-  background-color: white;
-  color: black;
-}
-
-.left {
-  left: 50px;
-}
-
-.right {
-  right: 50px;
-}
 </style>

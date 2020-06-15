@@ -5,9 +5,9 @@
 		<form action="#">
 			<h1>Create Account</h1>
 			<div class="social-container">
-				<a href="#" class="social"><i class="iconfont icon-weixin"></i></a>
-				<a href="#" class="social"><i class="iconfont icon-qq"></i></a>
-				<a href="#" class="social"><i class="iconfont icon-st-github"></i></a>
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your email for registration</span>
 			<input type="text" placeholder="Name" v-model="Newuser.newName" @blur="signUpChack(Newuser,false)"/>
@@ -20,9 +20,9 @@
 		<form action="#">
 			<h1>Sign in</h1>
 			<div class="social-container">
-				<a href="#" class="social"><i class="iconfont icon-weixin"></i></a>
-				<a href="#" class="social"><i class="iconfont icon-qq"></i></a>
-				<a href="#" class="social"><i class="iconfont icon-st-github"></i></a>
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your account</span>
 			<input type="text" placeholder="Username" v-model="mes.username" @blur="chacked(mes.username)" />
@@ -36,12 +36,12 @@
 			<div class="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
 				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn" @click="signin">Sign In</button>
+				<button class="ghost" id="signIn" @click="cut">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Hello, Friend!</h1>
 				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp" @click="signin">Sign Up</button>
+				<button class="ghost" id="signUp" @click="cut">Sign Up</button>
 			</div>
 		</div>
 	</div>
@@ -61,7 +61,7 @@ export default {
   name: 'Login',
   data: function () {
     return {
-       ischange:true,
+       ischange:false,
        mes:{
           username:window.localStorage.getItem("user"),
           pwd:window.localStorage.getItem("pwd")
@@ -75,17 +75,17 @@ export default {
           }
         ,
        users:[
-         {username:"guojin",pwd:"555555",userid:"10001",email:"10001@163.com"},
-         {username:"xingyue",pwd:"555555",userid:"00823",email:"10006@163.com"},
-         {username:"zhangsan",pwd:"555555",userid:"10002",email:"10002@163.com"},
-         {username:"lisi",pwd:"555555",userid:"10003",email:"10003@163.com"},
-         {username:"wangwu",pwd:"555555",userid:"10004",email:"10004@163.com"},
-         {username:"lilei",pwd:"555555",userid:"10005",email:"10005@163.com"}
+         {username:"guojin",pwd:"555555",userid:"10001",email:"10001@163.com",turename:"陈国金"},
+         {username:"xingyue",pwd:"555555",userid:"00823",email:"10006@163.com",turename:"陈国金"},
+         {username:"zhangsan",pwd:"555555",userid:"10002",email:"10002@163.com",turename:"陈国金"},
+         {username:"lisi",pwd:"555555",userid:"10003",email:"10003@163.com",turename:"陈国金"},
+         {username:"wangwu",pwd:"555555",userid:"10004",email:"10004@163.com",turename:"陈国金"},
+         {username:"lilei",pwd:"555555",userid:"10005",email:"10005@163.com",turename:"陈国金"}
         ]
     }
   },
   methods:{
-    signin(){//切换注册登录页面
+    cut(){//切换注册登录页面
       this.ischange =!this.ischange
     },
     chacked(user){  //验证登录用户名 
@@ -173,12 +173,17 @@ body {
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: -20px 0 50px;
+
+	
   
 }
 .login{
-  margin: 20px;
+     position: absolute;;
+    top: 20vh;
+    left: 0;
+    right: 0;
+    bottom: 20vh;
+    margin: auto;
 }
 
 h1 {
@@ -214,12 +219,10 @@ button {
 	border: 1px solid #FF4B2B;
 	background:linear-gradient(to right,#a8edea,#fed6e3);
 	color:#f1939c;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: bold;
-	/* padding: 0 30px; */
-	width: 50%;
-	height: 30px;
-	letter-spacing: 2px;
+	padding: 12px 45px;
+	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
 }
@@ -243,10 +246,10 @@ form {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 1px;
+	padding: 0 50px;
 	height: 100%;
 	text-align: center;
-	width: 100%;
+	flex-shrink:1
 }
 
 input {
@@ -256,9 +259,9 @@ input {
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
-	width: 70%;
-    outline:none; 
-    border-radius: 20px;
+	width: 100%;
+  outline:none; 
+  border-radius: 20px;
   
 }
 
@@ -271,15 +274,13 @@ input {
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
-  margin: 50px auto;
+  margin: 0 auto;
 }
 
 .form-container {
 	position: absolute;
 	top: 0;
 	height: 100%;
-	width: 100%;
-	display: flex;
 	transition: all 0.6s ease-in-out;
   
 }
@@ -364,7 +365,7 @@ input {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	/* padding: 0 4px; */
+	padding: 0 40px;
 	text-align: center;
 	top: 0;
 	height: 100%;
@@ -402,8 +403,8 @@ input {
 	justify-content: center;
 	align-items: center;
 	margin: 0 5px;
-	height: 30px;
-	width: 30px;
+	height: 40px;
+	width: 40px;
 }
 
 </style>

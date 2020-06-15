@@ -8,8 +8,8 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home //导入后直接使用
-    
+    component: Home ,//导入后直接使用
+    redirect:"login"
   },
   {
     path: '/user',
@@ -22,7 +22,19 @@ Vue.use(VueRouter)
     name: 'About',
    
     component: () => import('../views/About.vue')
-  },,
+  },
+  {
+    path: '/layout',
+    name: 'Layout',
+   
+    component: () => import('../views/Layout.vue')
+  },
+  {
+    path: '/canvas',
+    name: 'Canvas',
+   
+    component: () => import('../views/Canvas.vue')
+  },
   {
     path: '/login',
     name: 'Login',
@@ -45,17 +57,17 @@ Vue.use(VueRouter)
         path: 'test2',
         name: 'Test2',
         component: ()=>import('../components/Test2.vue')
-      },
-      {
-        path: 'test3',
-        name: 'Test3',
-        component: ()=>import('../components/Test3.vue')
-      },
-      {
-        path: 'test4',
-        name: 'Test4',
-        component: ()=>import('../components/Test4.vue')
       }
+      // {
+      //   path: 'test3',
+      //   name: 'Test3',
+      //   component: ()=>import('../components/Test3.vue')
+      // },
+      // {
+      //   path: 'test4',
+      //   name: 'Test4',
+      //   component: ()=>import('../components/Test4.vue')
+      // }
     ]
 
   }
@@ -65,8 +77,7 @@ const router = new VueRouter({
   mode: 'history',
   // mode: 'hash',
   base: process.env.BASE_URL,
-  routes,
-  linkActiveClass:"active",//给当前活跃的元素添加改变成“active”的属性
+  routes
 })
 
 export default router

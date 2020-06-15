@@ -1,47 +1,144 @@
-
-// 组件模板
-<template>
-  <div class="user">
-    <h6>欢迎，用户{{a}}</h6>
-    <h1>This is an user page</h1>
-    <NavMenu></NavMenu>
-   
-  
-  </div>
-</template>
-
-<script>
-import {mapState,mapComputed} from "vuex";
-// 导入需要用到的组件
-import NavMenu from '../components/NavMenu'
-// 导出组件
-export default {
-  name: 'Home',
-  components: {
-    NavMenu
-    // 注册子组件
- 
-  },
-  methods:{
-    
-
-  },
- computed:{
-   
-    c(){
-      return window.localStorage.getItem("user")
-      },
-      ...mapState({
-        a:state=>state.usermes,
-        b:state=>state.mes
-      })
-  },
-  }
-
-</script>
 <style scoped>
-h1,h6{
-  margin: 0;
-  padding: 0;
+.layout{
+    /* border: 1px solid #d7dde4; */
+    background: #f5f7f9;
+   
+    border-radius: 4px;
+   
 }
+.layout-con{
+        height: 100%;
+        width: 100%;
+    }
+    .menu-item span{
+        display: inline-block;
+        overflow: hidden;
+        width: 69px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: bottom;
+        transition: width .2s ease .2s;
+    }
+    .menu-item i{
+        transform: translateX(0px);
+        transition: font-size .2s ease, transform .2s ease;
+        vertical-align: middle;
+        font-size: 16px;
+    }
+    .collapsed-menu span{
+        width: 0px;
+        transition: width .2s ease;
+    }
+    .collapsed-menu i{
+        transform: translateX(5px);
+        transition: font-size .2s ease .2s, transform .2s ease .2s;
+        vertical-align: middle;
+        font-size: 22px;
+    }
+    .avatar{
+        background-color: azure;
+    }
 </style>
+<template>
+   <div class="layout">
+        <Layout>
+            <Header>
+                <Menu mode="horizontal" theme="dark" active-name="1">
+                    <div class="layout-logo"></div>
+                    <div class="layout-nav">
+                        <MenuItem name="1">
+                            <Icon type="ios-navigate"></Icon>
+                            Item 1
+                        </MenuItem>
+                        <MenuItem name="2">
+                            <Icon type="ios-keypad"></Icon>
+                            Item 2
+                        </MenuItem>
+                        <MenuItem name="3">
+                            <Icon type="ios-analytics"></Icon>
+                            Item 3
+                        </MenuItem>
+                        <MenuItem name="4">
+                        <Icon type="ios-paper"></Icon>
+                            
+                            Item 4
+                        </MenuItem>
+                    <Portraits></Portraits>
+                    </div>
+                </Menu>
+                    
+            </Header>
+            <Layout id="layout" :style="{minHeight: '90vh'}">
+                <Sider hide-trigger :style="{background: '#fff'}"
+                collapsible :collapsed-width="78"
+                 v-model="isCollapsed">
+                            <Menu active-name="1-2" theme="light" width="auto" :class="menuitemClasses">
+                                <Submenu name="1">
+                                    <template slot="title">
+                                        <Icon type="ios-navigate"></Icon>
+                                        Item 1
+                                    </template>
+                                    <MenuItem name="1-1">Option 1</MenuItem>
+                                    <MenuItem name="1-2">Option 2</MenuItem>
+                                    <MenuItem name="1-3">Option 3</MenuItem>
+                                </Submenu>
+                                <Submenu name="2">
+                                    <template slot="title">
+                                        <Icon type="ios-keypad"></Icon>
+                                        Item 2
+                                    </template>
+                                    <MenuItem name="2-1">Option 1</MenuItem>
+                                    <MenuItem name="2-2">Option 2</MenuItem>
+                                </Submenu>
+                                <Submenu name="3">
+                                    <template slot="title">
+                                        <Icon type="ios-analytics"></Icon>
+                                        Item 3
+                                    </template>
+                                    <MenuItem name="3-1">Option 1</MenuItem>
+                                    <MenuItem name="3-2">Option 2</MenuItem>
+                                </Submenu>
+                                <MenuItem name="1-3">
+                                <Icon type="settings"></Icon>
+                                <span>Option 3</span>
+                                </MenuItem>
+                            </Menu>
+                </Sider>
+                
+                <Layout :style="{padding: '0 24px 24px'}">
+                    <Breadcrumb :style="{margin: '24px 0'}">
+                        <BreadcrumbItem>Home</BreadcrumbItem>
+                        <BreadcrumbItem>Components</BreadcrumbItem>
+                        <BreadcrumbItem>Layout</BreadcrumbItem>
+                    </Breadcrumb>
+                    <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+                        
+
+                        
+                    </Content>
+                </Layout>
+            </Layout>
+        </Layout>
+    </div>
+</template>
+<script>
+import Portraits from '@/components/Portraits'
+   export default {
+        data () {
+            return {
+                isCollapsed: false
+            };
+        },
+        components:{
+          Portraits
+        },
+        computed: {
+            menuitemClasses: function () {
+                return [
+                    'menu-item',
+                    this.isCollapsed ? 'collapsed-menu' : ''
+                ]
+            }
+        }
+    }
+</script>

@@ -4,8 +4,7 @@
       <ul class="nav navbar-nav">
       <router-link to="/user/test1">测试1</router-link> |
       <router-link to="/user/test2">测试2</router-link>|
-      <router-link to="/user/test3">测试3</router-link>|
-      <router-link to="/user/test4">测试4</router-link>
+      <!-- <router-link to="/user/test3">测试3</router-link>| -->
       </ul>
       <div id=div1>
         <router-view></router-view>
