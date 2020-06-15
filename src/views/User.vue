@@ -1,51 +1,37 @@
 <style scoped>
+
 .layout{
-    /* border: 1px solid #d7dde4; */
+    border: 1px solid #d7dde4;
     background: #f5f7f9;
-   
+    position: relative;
     border-radius: 4px;
-   
+    overflow: hidden;
 }
-.layout-con{
-        height: 100%;
-        width: 100%;
-    }
-    .menu-item span{
-        display: inline-block;
-        overflow: hidden;
-        width: 69px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        vertical-align: bottom;
-        transition: width .2s ease .2s;
-    }
-    .menu-item i{
-        transform: translateX(0px);
-        transition: font-size .2s ease, transform .2s ease;
-        vertical-align: middle;
-        font-size: 16px;
-    }
-    .collapsed-menu span{
-        width: 0px;
-        transition: width .2s ease;
-    }
-    .collapsed-menu i{
-        transform: translateX(5px);
-        transition: font-size .2s ease .2s, transform .2s ease .2s;
-        vertical-align: middle;
-        font-size: 22px;
-    }
-    .avatar{
-        background-color: azure;
-    }
+.layout-logo{
+    width: 100px;
+    height: 30px;
+    background: #5b6270;
+    border-radius: 3px;
+    float: left;
+    position: relative;
+    top: 15px;
+    left: 20px;
+}
+.layout-nav{
+    width: 420px;
+    margin: 0 auto;
+    margin-right: 20px;
+}
+.layout-footer-center{
+    text-align: center;
+}
 </style>
 <template>
    <div class="layout">
         <Layout>
-            <Header>
+            <Header style="display:flex">
                 <Menu mode="horizontal" theme="dark" active-name="1">
-                    <div class="layout-logo"></div>
-                    <div class="layout-nav">
+                    
                         <MenuItem name="1">
                             <Icon type="ios-navigate"></Icon>
                             Item 1
@@ -63,9 +49,12 @@
                             
                             Item 4
                         </MenuItem>
-                    <Portraits></Portraits>
-                    </div>
+                    
+                        
                 </Menu>
+                <div class="layout-logo"></div>
+                <div class="layout-nav"><Portraits username="Jane Doe"></Portraits></div>
+                    
                     
             </Header>
             <Layout id="layout" :style="{minHeight: '90vh'}">
@@ -126,7 +115,8 @@ import Portraits from '@/components/Portraits'
    export default {
         data () {
             return {
-                isCollapsed: false
+                isCollapsed: false,
+                
             };
         },
         components:{

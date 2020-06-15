@@ -125,7 +125,7 @@ export default {
         console.log(window.localStorage.getItem("user"))//获取localstorage信息
         return  
         */
-       this.$store.dispatch('LoginByUsername', this.mes)//异步提交
+       this.$store.dispatch('asyncsetuser', this.mes)//异步提交
        .then(() => {
           this.$router.push({ path: '/User' }); //登录成功之后重定向到用户界面
        }).catch(err => {
