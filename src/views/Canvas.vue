@@ -1,17 +1,15 @@
 <template>
     <div class="intro">
-        
+       
     </div>
 </template>
-
 <script>
-import all from "./index"
+
 export default {
-    
+  
 }
 </script>
-
-<style>
+<style scoped>
 
 
 /* latin-ext */

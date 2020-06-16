@@ -1,42 +1,31 @@
 <template>
-    <div class="Portraits">
-      <Avatar 
-      :username="users.username"
-      :src="users.src"
-      :backgroundColor="users.backgroundColor"
-      :color="users.color"
-      ></Avatar>
-      <span></span>
+    <div class="demo-avatar">
+        
+        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg">USER</Avatar>
+         <span>asdasddas</span> 
+        
     </div>
-   
 </template>
+
 <script>
 import {mapState} from "vuex"
-import Avatar from 'vue-avatar'
     export default {
         data () {
             return {
                 value:0,
                 max:100,
                 
+                
             }
         },
-       
-        components:{
-            Avatar
-        },
+      
         computed:{
             ...mapState([
                 "users"
             ]),
-            // username:this.$store
+            
         }
-        ,
-        methods:{
-            
-            
-        },
-        
+       
     }
 </script>
 <style  scoped>

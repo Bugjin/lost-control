@@ -1,53 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href='//fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
-    <style>
-        body {
-    margin: 0;
-    background-color: #000;
-    color: #fff;
-    font-family: 'Raleway', sans-serif;
-}
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.intro {
-    position: absolute;
-    z-index: 2;
-    top: 25px;
-    left: 25%;
-    width: 50%;
-    text-align: center;
-    pointer-events: none;
-}
-h1 {
-    margin: 10px 0;
-    text-shadow: 0 0 20px rgba(255, 255, 255, .5);
-    font-family: 'Berkshire Swash', cursive;
-}
-p {
-    color: rgba(255, 255, 255, .75);
-}
-    </style> 
-<script src="https://wow.techbrood.com/libs/jquery/jquery-1.11.1.min.js"></script>
-</head>
-<body>
-<div class="intro">
-    <h1>给世界带来光明和希望</h1>
-    <p>用你的鼠标（或移动触摸）来创造星系!</p>
-</div>
-</body>
-<script>
-    'use strict';
+'use strict';
 
 var w = window.innerWidth;
 var h = window.innerHeight;
@@ -320,5 +271,3 @@ window.addEventListener('mouseup', disableDraw);
 window.addEventListener('touchstart', activateDraw);
 window.addEventListener('touchmove', moveEvent);
 window.addEventListener('touchend', disableDraw);
-</script>
-</html>

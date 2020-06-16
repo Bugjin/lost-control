@@ -1,4 +1,4 @@
-<style scoped>
+<style >
 
 .layout{
     border: 1px solid #d7dde4;
@@ -32,7 +32,7 @@
             <Header style="display:flex">
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     
-                        <MenuItem name="1">
+                        <!-- <MenuItem name="1">
                             <Icon type="ios-navigate"></Icon>
                             Item 1
                         </MenuItem>
@@ -48,13 +48,17 @@
                         <Icon type="ios-paper"></Icon>
                             
                             Item 4
-                        </MenuItem>
+                        </MenuItem> -->
                     
                         
                 </Menu>
-                <div class="layout-logo"></div>
-                <div class="layout-nav"><Portraits username="Jane Doe"></Portraits></div>
+               
+                <div class="layout-nav">
+                    <portraits></portraits>
                     
+                    
+                </div>
+                   
                     
             </Header>
             <Layout id="layout" :style="{minHeight: '90vh'}">
@@ -67,7 +71,7 @@
                                         <Icon type="ios-navigate"></Icon>
                                         Item 1
                                     </template>
-                                    <MenuItem name="1-1">Option 1</MenuItem>
+                                    <MenuItem name="1-1"><router-link to="/user/cloud">demo2</router-link>星云</MenuItem>
                                     <MenuItem name="1-2">Option 2</MenuItem>
                                     <MenuItem name="1-3">Option 3</MenuItem>
                                 </Submenu>
@@ -92,17 +96,18 @@
                                 <span>Option 3</span>
                                 </MenuItem>
                             </Menu>
+                            
                 </Sider>
                 
                 <Layout :style="{padding: '0 24px 24px'}">
-                    <Breadcrumb :style="{margin: '24px 0'}">
+                    <!-- <Breadcrumb :style="{margin: '24px 0'}">
                         <BreadcrumbItem>Home</BreadcrumbItem>
                         <BreadcrumbItem>Components</BreadcrumbItem>
                         <BreadcrumbItem>Layout</BreadcrumbItem>
-                    </Breadcrumb>
-                    <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+                    </Breadcrumb> -->
+                    <Content :style="{padding: '24px', minHeight: '280px', marginTop:'24px',background: '#fff'}">
                         
-
+                        <router-view :style="{padding: '24px', minHeight: '280px', marginTop:'24px',background: '#fff'}"></router-view>
                         
                     </Content>
                 </Layout>

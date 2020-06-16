@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     users:[
       {username:"guojin",pwd:"555555",userid:"10001",email:"10000@163.com",backgroundColor:"pink",
-      turename:"陈国金",src:'require("../assets/image/img111.png")' ,initials:"",},
+      truename:"陈国金",src:'require("../assets/image/img111.png")' ,initials:"",},
 
       {username:"xingyue",pwd:"555555",userid:"00823",email:"10001@163.com",turename:"陈国金"},
       {username:"zhangsan",pwd:"555555",userid:"10002",email:"10002@163.com",turename:"陈国金"},

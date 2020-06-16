@@ -45,12 +45,12 @@ Vue.use(VueRouter)
     path: '/user',
     name: 'User',
     component: () => import('../views/User.vue'),
-    redirect: '/user/test1',
+    redirect: '/user/cloud',
     children:[
       {
-        path: 'test1',
-        name: 'Test1',
-        component: ()=>import('../components/Test1.vue')
+        path: 'cloud',
+        name: 'Cloud',
+        component: ()=>import('../components/Cloud.vue')
         
       },
       {
