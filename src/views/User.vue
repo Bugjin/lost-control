@@ -25,6 +25,16 @@
 .layout-footer-center{
     text-align: center;
 }
+.content{
+     position: absolute;
+    /* z-index: 2; */
+    top: 25px;
+    left: 25%;
+    width: 50%;
+    text-align: center;
+    pointer-events: none;
+}
+
 </style>
 <template>
    <div class="layout">

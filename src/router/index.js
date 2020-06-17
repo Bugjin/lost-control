@@ -9,7 +9,7 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home ,//导入后直接使用
-    redirect:"login"
+    // redirect:"login"
   },
   {
     path: '/user',

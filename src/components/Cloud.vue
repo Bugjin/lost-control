@@ -1,4 +1,4 @@
-<style scoped>
+<style>
 
 
 body {
@@ -14,7 +14,7 @@ canvas {
     width: 100%;
     height: 100%;
 }
-.intro {
+#intro {
     position: absolute;
     z-index: 2;
     top: 25px;
@@ -35,9 +35,9 @@ p {
 
 
 </style>
-</style>
+
 <template>
-    <div class="intro">
+    <div id="intro">
        
     </div>
 </template>
