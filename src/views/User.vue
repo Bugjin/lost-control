@@ -72,7 +72,7 @@
                     
             </Header>
             <Layout id="layout" :style="{minHeight: '90vh'}">
-                <Sider hide-trigger :style="{background: '#fff'}"
+                <!-- <Sider trigger :style="{background: '#fff'}"
                 collapsible :collapsed-width="78"
                  v-model="isCollapsed">
                             <Menu active-name="1-2" theme="light" width="auto" :class="menuitemClasses">
@@ -106,23 +106,25 @@
                                 <span>Option 3</span>
                                 </MenuItem>
                             </Menu>
+                                
                             
-                </Sider>
+                </Sider> -->
                 
-                <Layout :style="{padding: '0 24px 24px'}">
-                    <!-- <Breadcrumb :style="{margin: '24px 0'}">
+                <!-- <Layout :style="{padding: '0 24px 24px'}">
+                    <Breadcrumb :style="{margin: '24px 0'}">
                         <BreadcrumbItem>Home</BreadcrumbItem>
                         <BreadcrumbItem>Components</BreadcrumbItem>
                         <BreadcrumbItem>Layout</BreadcrumbItem>
-                    </Breadcrumb> -->
+                    </Breadcrumb>
                     <Content :style="{padding: '24px', minHeight: '280px', marginTop:'24px',background: '#fff'}">
                         
                         <router-view :style="{padding: '24px', minHeight: '280px', marginTop:'24px',background: '#fff'}"></router-view>
                         
                     </Content>
-                </Layout>
+                </Layout> -->
             </Layout>
         </Layout>
+        
     </div>
 </template>
 <script>
@@ -131,9 +133,10 @@ import Portraits from '@/components/Portraits'
         data () {
             return {
                 isCollapsed: false,
-                
+                flag :true
             };
         },
+        methods: { },
         components:{
           Portraits
         },

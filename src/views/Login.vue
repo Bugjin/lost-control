@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" v-if="islogin">
   <div class="container" id="container" v-bind:class="{ active:ischange }">
 	<div class="form-container sign-up-container">
 		<form action="#">
@@ -61,7 +61,8 @@ export default {
   name: 'Login',
   data: function () {
     return {
-       ischange:false,
+			 ischange:false,
+			 islogin:true,
        mes:{
           username:window.localStorage.getItem("user"),
           pwd:window.localStorage.getItem("pwd")
@@ -130,7 +131,8 @@ export default {
           this.$router.push({ path: '/User' }); //登录成功之后重定向到用户界面
        }).catch(err => {
           this.$message.error(err); //登录失败提示错误
-       });
+			 });
+			 this.islogin=!this.islogin
       }else{
         alert("账号或密码错误") 
       }
