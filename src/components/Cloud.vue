@@ -1,6 +1,4 @@
 <style>
-
-
 body {
     margin: 0;
     background-color: #000;
@@ -9,12 +7,18 @@ body {
 }
 canvas {
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
-    height: 100%;
+    height: 100%;;
+    /* width: 93vw;
+    height: 85vh; */
+    /* margin: 0;
+    padding: 0px; */
+    
+    
 }
-#intro {
+.intro {
     position: absolute;
     z-index: 2;
     top: 25px;
@@ -31,9 +35,6 @@ h1 {
 p {
     color: rgba(255, 255, 255, .75);
 }
-
-
-
 </style>
 
 <template>

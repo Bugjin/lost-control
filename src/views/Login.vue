@@ -128,11 +128,13 @@ export default {
         */
        this.$store.dispatch('asyncsetuser', this.mes)//异步提交
        .then(() => {
-          this.$router.push({ path: '/User' }); //登录成功之后重定向到用户界面
+				  
+          this.$router.push({ path: '/user' }); //登录成功之后重定向到用户界面
        }).catch(err => {
           this.$message.error(err); //登录失败提示错误
 			 });
 			 this.islogin=!this.islogin
+			 this.$emit('islogin', this.islogin);
       }else{
         alert("账号或密码错误") 
       }
